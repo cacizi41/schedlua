@@ -129,6 +129,23 @@ function Scheduler.scheduleTask(self, task, params, priority)
 	return task;
 end
 
+function Scheduler.scheduleTaskP(self, task, params, priority)
+
+	params = params or {}
+
+	if not task then
+		return false, "no task specified"
+	end
+
+	task:setParams(params);
+
+	self.TasksReadyToRun:pinsert(task, priority_comp);
+
+	task.state = "readytorun"
+
+	return task;
+end
+
 function Scheduler.removeTask(self, task)
 	--print("REMOVING DEAD TASK: ", task);
 	return true;

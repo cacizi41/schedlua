@@ -51,6 +51,19 @@ local function spawn(func, ...)
 	return coop(100, func, ...);
 end
 
+-- get priority from tasks
+local function coopP(priority, func, ...)
+	local task = Task(func, ...)
+	task.TaskID = getNewTaskID();
+	task.Priority = priority;
+	return Kernel.Scheduler:scheduleTaskP(task, {...});
+end
+
+-- user task w/ priority spawn, spawn wrapper.
+--local function spawnP(func, ...)
+	--return coopP(priority, func, ...);
+--end
+
 local function yield(...)
 	return coroutine.yield(...);
 end

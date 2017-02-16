@@ -58,4 +58,15 @@ function Task.resume(self)
 end
 
 
+local sw = require("schedlua.stopwatch")()
+-- instance
+function Task.lastRunP(self)
+	return sw:seconds();
+end
+
+function Task.priorityP(self)
+	return nil
+end
+
+
 return Task;
